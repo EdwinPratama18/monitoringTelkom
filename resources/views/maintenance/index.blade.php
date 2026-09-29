@@ -20,15 +20,15 @@
     <!-- Page Header -->
     <div class="page-header-row">
         <div>
-            <div style="font-size: 11.5px; color: #64748B; margin-bottom: 2px;">Pemeliharaan Rutin STO Witel Base-G</div>
-            <h2 class="page-heading-title">Data Maintenance Perangkat</h2>
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Pemeliharaan Rutin STO Witel Base-G</div>
+            <h2 class="page-heading-title" style="font-size: 22px;">Data Maintenance Perangkat</h2>
             <div class="page-heading-desc">Log kegiatan inspeksi teknisi, pemeliharaan preventif, dan audit checklist infrastruktur</div>
         </div>
         <button type="button" @click="showCreateModal = true" class="btn btn-primary">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            <span>+ Input Maintenance (Modal)</span>
+            <span>+ Input Maintenance</span>
         </button>
     </div>
 

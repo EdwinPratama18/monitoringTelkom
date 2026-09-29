@@ -20,15 +20,15 @@
     <!-- Page Header -->
     <div class="page-header-row">
         <div>
-            <div style="font-size: 11.5px; color: #64748B; margin-bottom: 2px;">Inventaris Operasional STO Witel Base-G</div>
-            <h2 class="page-heading-title">Data Perangkat Infrastruktur</h2>
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Inventaris Operasional STO Witel Base-G</div>
+            <h2 class="page-heading-title" style="font-size: 22px;">Data Perangkat Infrastruktur</h2>
             <div class="page-heading-desc">Inventaris dan status teknis perangkat telekomunikasi (PLN, Genset, Rectifier, DWDM, Router)</div>
         </div>
         <button type="button" @click="showCreateModal = true" class="btn btn-primary">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            <span>+ Tambah Perangkat (Modal)</span>
+            <span>+ Tambah Perangkat</span>
         </button>
     </div>
 

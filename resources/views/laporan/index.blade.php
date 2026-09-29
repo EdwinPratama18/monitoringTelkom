@@ -4,7 +4,8 @@
     <!-- Page Header -->
     <div class="page-header-row">
         <div>
-            <h2 class="page-heading-title">Pusat Laporan & Pelaporan Operasional</h2>
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Pusat Dokumentasi & Audit STO</div>
+            <h2 class="page-heading-title" style="font-size: 22px;">Pusat Laporan & Pelaporan Operasional</h2>
             <div class="page-heading-desc">Rekapitulasi berkala kegiatan pemeliharaan dan audit kelayakan infrastruktur telekomunikasi STO Witel Base-G</div>
         </div>
     </div>

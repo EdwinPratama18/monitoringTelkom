@@ -14,14 +14,14 @@
     <!-- Page Header -->
     <div class="page-header-row">
         <div>
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span class="badge badge-info" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Network Operations Center</span>
-                <span style="font-size: 11.5px; color: #64748B;">STO WITEL BASE-G JAYAPURA</span>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span class="badge badge-info" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700;">Network Operations Center</span>
+                <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">STO WITEL BASE-G JAYAPURA</span>
             </div>
-            <h2 class="page-heading-title" style="font-size: 20px;">Sistem Monitoring & Pemeliharaan Infrastruktur</h2>
-            <div class="page-heading-desc">Telemetri status kelistrikan (PLN & Genset DEFA), rectifiers, baterai, perangkat transmisi DWDM, dan routing STO</div>
+            <h2 class="page-heading-title" style="font-size: 22px;">Sistem Monitoring & Pemeliharaan Infrastruktur</h2>
+            <div class="page-heading-desc">Telemetri status kelistrikan (PLN & Genset DEFA), rectifiers, baterai, transmisi DWDM, dan routing STO</div>
         </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
             <a href="{{ route('perangkat.index') }}" class="btn btn-secondary">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,32 +33,32 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-                <span>+ Input Maintenance (Modal)</span>
+                <span>+ Input Maintenance</span>
             </button>
         </div>
     </div>
 
     <!-- Operational Incident Alert (if any damaged devices exist) -->
     @if($perangkatRusakList->isNotEmpty())
-    <div class="app-alert app-alert-danger" style="flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 22px;">
+    <div class="app-alert app-alert-danger" style="flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-            <div style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+            <div style="display: flex; align-items: center; gap: 9px; font-weight: 700; color: #991B1B;">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <span>Peringatan Operasional: Ditemukan {{ $perangkatRusak }} perangkat dengan kondisi tidak optimal</span>
             </div>
-            <span style="font-size: 11.5px; color: #991B1B; font-weight: 500;">Harap segera dilakukan tindakan perbaikan</span>
+            <span style="font-size: 12px; color: #991B1B; font-weight: 600;">Harap segera dilakukan inspeksi & perbaikan</span>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             @foreach($perangkatRusakList as $p)
             <a href="{{ route('perangkat.show', $p) }}"
-               style="background-color: #FFFFFF; border: 1px solid #FECACA; padding: 5px 10px; border-radius: 4px; font-size: 12px; color: #991B1B; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                <span class="code-pill" style="font-size: 10.5px; border-color: #FECACA;">{{ $p->kode_perangkat }}</span>
-                <span style="font-weight: 600;">{{ $p->nama_perangkat }}</span>
-                <span>({{ $p->lokasi }})</span>
-                <span class="badge {{ $p->badge_kondisi }}" style="font-size: 10px; padding: 1px 5px;">{{ $p->kondisi }}</span>
+               style="background-color: #FFFFFF; border: 1px solid #FECACA; padding: 6px 12px; border-radius: var(--radius-sm); font-size: 12px; color: #991B1B; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-xs); transition: all 0.15s ease;">
+                <span class="code-pill" style="font-size: 11px; border-color: #FECACA;">{{ $p->kode_perangkat }}</span>
+                <span style="font-weight: 700;">{{ $p->nama_perangkat }}</span>
+                <span style="color: #64748B;">({{ $p->lokasi }})</span>
+                <span class="badge {{ $p->badge_kondisi }}" style="font-size: 10.5px; padding: 2px 7px;">{{ $p->kondisi }}</span>
             </a>
             @endforeach
         </div>
@@ -66,7 +66,7 @@
     @endif
 
     <!-- KPI Metrics Grid (5 Distinct Metrics) -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 22px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px;">
         <!-- 1. Total Perangkat -->
         <div class="metric-card metric-border-primary">
             <div class="metric-header">
@@ -80,7 +80,7 @@
             </div>
             <div class="metric-value">{{ $totalPerangkat }}</div>
             <div class="metric-subtext">
-                <span>Unit infrastruktur terdaftar di STO</span>
+                <span>Unit infrastruktur terdaftar</span>
             </div>
         </div>
 
@@ -97,7 +97,7 @@
             </div>
             <div class="metric-value" style="color: #16A34A;">{{ $perangkatBaik }}</div>
             <div class="metric-subtext">
-                <span class="badge badge-success" style="padding: 1px 6px;">
+                <span class="badge badge-success" style="padding: 2px 7px;">
                     {{ $totalPerangkat > 0 ? round(($perangkatBaik / $totalPerangkat) * 100) : 0 }}%
                 </span>
                 <span>Beroperasi normal</span>
@@ -117,7 +117,7 @@
             </div>
             <div class="metric-value" style="color: #D97706;">{{ $kondisiData[1] ?? 0 }}</div>
             <div class="metric-subtext">
-                <span>Perlu tindakan maintenance</span>
+                <span>Perlu tindakan perbaikan</span>
             </div>
         </div>
 
@@ -134,7 +134,7 @@
             </div>
             <div class="metric-value" style="color: #DC2626;">{{ $kondisiData[2] ?? 0 }}</div>
             <div class="metric-subtext">
-                <span>Prioritas penanganan teknisi</span>
+                <span>Prioritas utama teknisi</span>
             </div>
         </div>
 
@@ -151,18 +151,18 @@
             </div>
             <div class="metric-value" style="color: var(--telkom-red);">{{ $maintenanceSelesai }}</div>
             <div class="metric-subtext">
-                <span>Dari total {{ $totalMaintenance }} kegiatan maintenance</span>
+                <span>Dari total {{ $totalMaintenance }} kegiatan</span>
             </div>
         </div>
     </div>
 
     <!-- DEDICATED MONITORING SECTION (#monitoring) -->
-    <section id="monitoring" style="margin-bottom: 22px;">
+    <section id="monitoring" style="margin-bottom: 24px;">
         <div class="card">
             <div class="card-header card-header-subtle">
                 <div>
                     <h3 class="card-title">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 17px; height: 17px; color: #475569;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px; color: var(--telkom-red);">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
@@ -177,45 +177,45 @@
             </div>
             <div class="card-body">
                 <!-- Status Matrix Cards -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
                     <!-- Panel Baik -->
-                    <div style="border: 1px solid #E2E8F0; border-radius: 6px; padding: 14px; background-color: #FFFFFF;">
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; background-color: #FFFFFF; box-shadow: var(--shadow-xs);">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                             <span class="badge badge-success">
                                 <span class="badge-dot"></span>
                                 Kondisi: Baik
                             </span>
-                            <span style="font-size: 16px; font-weight: 700; color: #16A34A;">{{ $kondisiData[0] ?? 0 }} Unit</span>
+                            <span style="font-size: 18px; font-weight: 800; color: #16A34A;">{{ $kondisiData[0] ?? 0 }} Unit</span>
                         </div>
-                        <p style="font-size: 12px; color: #64748B; margin: 0; line-height: 1.4;">
+                        <p style="font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.5;">
                             Perangkat beroperasi secara optimal, tidak ditemukan anomali parameter daya, suhu ruang, maupun transmisi optik.
                         </p>
                     </div>
 
                     <!-- Panel Rusak Ringan -->
-                    <div style="border: 1px solid #E2E8F0; border-radius: 6px; padding: 14px; background-color: #FFFFFF;">
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; background-color: #FFFFFF; box-shadow: var(--shadow-xs);">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                             <span class="badge badge-warning">
                                 <span class="badge-dot"></span>
                                 Kondisi: Rusak Ringan
                             </span>
-                            <span style="font-size: 16px; font-weight: 700; color: #D97706;">{{ $kondisiData[1] ?? 0 }} Unit</span>
+                            <span style="font-size: 18px; font-weight: 800; color: #D97706;">{{ $kondisiData[1] ?? 0 }} Unit</span>
                         </div>
-                        <p style="font-size: 12px; color: #64748B; margin: 0; line-height: 1.4;">
+                        <p style="font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.5;">
                             Perangkat mengalami degradasi minor seperti kabel patching kendur, fan pendingin bising, atau filter debu kotor.
                         </p>
                     </div>
 
                     <!-- Panel Rusak Berat -->
-                    <div style="border: 1px solid #E2E8F0; border-radius: 6px; padding: 14px; background-color: #FFFFFF;">
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; background-color: #FFFFFF; box-shadow: var(--shadow-xs);">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                             <span class="badge badge-danger">
                                 <span class="badge-dot"></span>
                                 Kondisi: Rusak Berat
                             </span>
-                            <span style="font-size: 16px; font-weight: 700; color: #DC2626;">{{ $kondisiData[2] ?? 0 }} Unit</span>
+                            <span style="font-size: 18px; font-weight: 800; color: #DC2626;">{{ $kondisiData[2] ?? 0 }} Unit</span>
                         </div>
-                        <p style="font-size: 12px; color: #64748B; margin: 0; line-height: 1.4;">
+                        <p style="font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.5;">
                             Perangkat padam / offline atau modul board utama mengalami kegagalan fungsi. Memerlukan pergantian unit segera.
                         </p>
                     </div>
@@ -225,7 +225,7 @@
     </section>
 
     <!-- Operational Telemetry Charts Row -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-bottom: 22px;">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 24px;">
         <!-- Chart 1: Maintenance per Bulan -->
         <div class="card" style="margin-bottom: 0;">
             <div class="card-header">
@@ -618,6 +618,8 @@
     <!-- Chart.js Configuration -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const fontStack = "'Plus Jakarta Sans', 'Inter', sans-serif";
+
             // Chart 1: Maintenance Bulanan
             const ctxMaint = document.getElementById('chartMaintenance');
             if (ctxMaint) {
@@ -628,10 +630,10 @@
                         datasets: [{
                             label: 'Jumlah Kegiatan',
                             data: {!! json_encode($bulanData) !!},
-                            backgroundColor: '#C91F18',
-                            hoverBackgroundColor: '#9F1610',
-                            borderRadius: 3,
-                            maxBarThickness: 28
+                            backgroundColor: '#E11D24',
+                            hoverBackgroundColor: '#B91C1C',
+                            borderRadius: 6,
+                            maxBarThickness: 32
                         }]
                     },
                     options: {
@@ -641,20 +643,20 @@
                             legend: { display: false },
                             tooltip: {
                                 backgroundColor: '#0F172A',
-                                titleFont: { size: 12, family: 'Inter' },
-                                bodyFont: { size: 12, family: 'Inter' },
-                                padding: 8,
-                                cornerRadius: 4
+                                titleFont: { size: 12, family: fontStack, weight: 'bold' },
+                                bodyFont: { size: 12, family: fontStack },
+                                padding: 10,
+                                cornerRadius: 8
                             }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                ticks: { stepSize: 1, font: { size: 11, family: 'Inter' }, color: '#64748B' },
+                                ticks: { stepSize: 1, font: { size: 11, family: fontStack }, color: '#64748B' },
                                 grid: { color: '#F1F5F9' }
                             },
                             x: {
-                                ticks: { font: { size: 11, family: 'Inter' }, color: '#64748B' },
+                                ticks: { font: { size: 11, family: fontStack }, color: '#64748B' },
                                 grid: { display: false }
                             }
                         }
@@ -671,24 +673,31 @@
                         labels: {!! json_encode($kondisiLabels) !!},
                         datasets: [{
                             data: {!! json_encode($kondisiData) !!},
-                            backgroundColor: ['#16A34A', '#D97706', '#DC2626'],
-                            borderWidth: 2,
+                            backgroundColor: ['#16A34A', '#F59E0B', '#EF4444'],
+                            borderWidth: 3,
                             borderColor: '#FFFFFF'
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        cutout: '68%',
+                        cutout: '70%',
                         plugins: {
                             legend: {
                                 position: 'bottom',
                                 labels: {
                                     boxWidth: 10,
-                                    padding: 12,
-                                    font: { size: 11, family: 'Inter' },
+                                    padding: 14,
+                                    font: { size: 11.5, family: fontStack, weight: '500' },
                                     color: '#475569'
                                 }
+                            },
+                            tooltip: {
+                                backgroundColor: '#0F172A',
+                                titleFont: { size: 12, family: fontStack },
+                                bodyFont: { size: 12, family: fontStack },
+                                padding: 10,
+                                cornerRadius: 8
                             }
                         }
                     }
@@ -706,24 +715,34 @@
                         labels: jenisLabels,
                         datasets: [{
                             data: jenisDataVals,
-                            backgroundColor: '#334155',
-                            borderRadius: 3,
-                            maxBarThickness: 18
+                            backgroundColor: '#0F172A',
+                            hoverBackgroundColor: '#1E293B',
+                            borderRadius: 6,
+                            maxBarThickness: 22
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         indexAxis: 'y',
-                        plugins: { legend: { display: false } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#0F172A',
+                                titleFont: { size: 12, family: fontStack },
+                                bodyFont: { size: 12, family: fontStack },
+                                padding: 10,
+                                cornerRadius: 8
+                            }
+                        },
                         scales: {
                             x: {
                                 beginAtZero: true,
-                                ticks: { stepSize: 1, font: { size: 11, family: 'Inter' }, color: '#64748B' },
+                                ticks: { stepSize: 1, font: { size: 11, family: fontStack }, color: '#64748B' },
                                 grid: { color: '#F1F5F9' }
                             },
                             y: {
-                                ticks: { font: { size: 11, family: 'Inter' }, color: '#334155' },
+                                ticks: { font: { size: 11.5, family: fontStack, weight: '500' }, color: '#1E293B' },
                                 grid: { display: false }
                             }
                         }

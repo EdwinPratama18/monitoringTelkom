@@ -113,13 +113,14 @@
                         </td>
                         <td>
                             @if($m->checklist_total > 0)
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <div style="width: 60px; background-color: #E2E8F0; height: 5px; border-radius: 3px; overflow: hidden;">
-                                    <div style="width: {{ ($m->checklist_selesai / $m->checklist_total) * 100 }}%; height: 100%; background-color: #16A34A;"></div>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; font-weight: 700; color: #166534;">
+                                    <span>{{ round(($m->checklist_selesai / $m->checklist_total) * 100) }}%</span>
+                                    <span style="color: var(--text-muted); font-size: 11px;">{{ $m->checklist_selesai }}/{{ $m->checklist_total }}</span>
                                 </div>
-                                <span style="font-size: 11.5px; font-weight: 600; color: #166534;">
-                                    {{ $m->checklist_selesai }}/{{ $m->checklist_total }} ({{ round(($m->checklist_selesai / $m->checklist_total) * 100) }}%)
-                                </span>
+                                <div style="width: 100px; background-color: #E2E8F0; height: 6px; border-radius: 9999px; overflow: hidden;">
+                                    <div style="width: {{ ($m->checklist_selesai / $m->checklist_total) * 100 }}%; height: 100%; background: linear-gradient(90deg, #22C55E 0%, #16A34A 100%); border-radius: 9999px;"></div>
+                                </div>
                             </div>
                             @else
                             <span style="color: #94A3B8;">-</span>
@@ -127,15 +128,17 @@
                         </td>
                         <td>
                             @if(is_array($m->checklist))
-                            <div style="font-size: 11.5px; line-height: 1.4; max-width: 400px;">
+                            <div style="font-size: 12px; line-height: 1.45; max-width: 420px;">
                                 @foreach(array_slice($m->checklist, 0, 3) as $cl)
-                                <div style="display: flex; align-items: center; gap: 4px; color: {{ !empty($cl['checked']) ? '#166534' : '#94A3B8' }};">
-                                    <span>{{ !empty($cl['checked']) ? '✓' : '✗' }}</span>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; color: {{ !empty($cl['checked']) ? '#15803D' : '#64748B' }};">
+                                    <span style="font-weight: 700; font-size: 11px; width: 14px; height: 14px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background-color: {{ !empty($cl['checked']) ? '#DCFCE7' : '#F1F5F9' }}; color: {{ !empty($cl['checked']) ? '#16A34A' : '#94A3B8' }};">
+                                        {{ !empty($cl['checked']) ? '✓' : '—' }}
+                                    </span>
                                     <span>{{ $cl['item'] }}</span>
                                 </div>
                                 @endforeach
                                 @if(count($m->checklist) > 3)
-                                <span style="color: #64748B; font-size: 11px;">+ {{ count($m->checklist) - 3 }} item lainnya...</span>
+                                <span style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-left: 20px;">+ {{ count($m->checklist) - 3 }} item lainnya...</span>
                                 @endif
                             </div>
                             @endif

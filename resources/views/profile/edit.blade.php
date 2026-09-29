@@ -1,28 +1,52 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+    <x-slot name="title">Pengaturan Profil Pengguna</x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+    <!-- Page Header -->
+    <div class="page-header-row">
+        <div>
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Akun & Keamanan</div>
+            <h2 class="page-heading-title" style="font-size: 22px;">Pengaturan Profil & Kredensial</h2>
+            <div class="page-heading-desc">Perbarui informasi profil pengguna dan kata sandi akun sistem</div>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 900px;">
+        <!-- Profil Information -->
+        <div class="card" style="margin-bottom: 0;">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">Informasi Pengguna</h3>
+                    <div class="card-subtitle">Perbarui data nama dan alamat email akun Anda</div>
                 </div>
             </div>
+            <div class="card-body">
+                @include('profile.partials.update-profile-information-form')
+            </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+        <!-- Update Password -->
+        <div class="card" style="margin-bottom: 0;">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">Perbarui Password</h3>
+                    <div class="card-subtitle">Pastikan akun Anda menggunakan kata sandi acak yang aman</div>
                 </div>
             </div>
+            <div class="card-body">
+                @include('profile.partials.update-password-form')
+            </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+        <!-- Delete Account -->
+        <div class="card" style="margin-bottom: 0;">
+            <div class="card-header" style="border-bottom-color: #FEE2E2; background-color: #FEF2F2;">
+                <div>
+                    <h3 class="card-title" style="color: #991B1B;">Hapus Akun Pengguna</h3>
+                    <div class="card-subtitle" style="color: #B91C1C;">Tindakan permanen penghapusan seluruh data akun Anda</div>
                 </div>
+            </div>
+            <div class="card-body">
+                @include('profile.partials.delete-user-form')
             </div>
         </div>
     </div>
