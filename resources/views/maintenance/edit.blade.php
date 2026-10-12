@@ -104,7 +104,10 @@
                         <div class="card-subtitle">Item verifikasi teknis pemeliharaan</div>
                     </div>
                     <button type="button" onclick="addChecklistItem()" class="btn btn-secondary btn-sm">
-                        + Tambah Item
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span>Tambah Item</span>
                     </button>
                 </div>
                 <div class="card-body">

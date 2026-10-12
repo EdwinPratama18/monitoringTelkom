@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Diagram Arsitektur - Monitoring Telkom STO Base-G</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --telkom-red: #EE2E24;
+      --telkom-red-dark: #C41C13;
+      --telkom-gray: #1E293B;
+      --bg-dark: #0F172A;
+      --card-bg: #1E293B;
+      --card-border: #334155;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent-blue: #38BDF8;
+      --accent-green: #22C55E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #0B1120 0%, #0F172A 50%, #1A2234 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--telkom-red), #FF5E55);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: white;
+      box-shadow: 0 4px 14px rgba(238, 46, 36, 0.4);
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(30, 41, 59, 0.7);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--telkom-red);
+      color: white;
+      box-shadow: 0 4px 12px rgba(238, 46, 36, 0.35);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .diagram-card {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .diagram-card.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .card-title h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-title p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-weight: 600;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--telkom-red);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--telkom-red-dark);
+      box-shadow: 0 4px 15px rgba(238, 46, 36, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .preview-container {
+      padding: 2rem;
+      background: #0A0F1D;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 520px;
+      overflow: auto;
+      position: relative;
+    }
+
+    .preview-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: white;
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+    }
+
+    .preview-img.zoomed {
+      transform: scale(1.6);
+      cursor: zoom-out;
+    }
+
+    .card-footer {
+      padding: 1.5rem 2rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-top: 1px solid var(--card-border);
+    }
+
+    .card-footer h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card-footer ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .card-footer li {
+      margin-bottom: 0.35rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo">T</div>
+      <div class="brand-text">
+        <h1>Sistem Monitoring & Pemeliharaan Telkom</h1>
+        <p>STO Base-G Witel Papua &bull; Architectural Diagrams</p>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">
+        <span>1. Alur Sistem</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab(1)">
+        <span>2. Use Case</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab(2)">
+        <span>3. Class Diagram</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab(3)">
+        <span>4. Activity Diagram</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab(4)">
+        <span>5. ERD</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. Alur Sistem -->
+    <div class="diagram-card active" id="card-0">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>1. Alur Sistem (Flowchart) <span class="badge">Operational Flow</span></h2>
+          <p>Alur end-to-end dari autentikasi, manajemen perangkat, penjadwalan, inspeksi lapangan, hingga riwayat laporan.</p>
+        </div>
+        <div class="action-group">
+          <a href="images/diagrams/alur_sistem.png" download="alur_sistem_telkom.png" class="btn btn-primary">
+            Download PNG (240 DPI)
+          </a>
+          <a href="images/diagrams/alur_sistem.svg" download="alur_sistem_telkom.svg" class="btn btn-secondary">
+            Download SVG Vektor
+          </a>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img src="images/diagrams/alur_sistem.png" alt="Alur Sistem Monitoring Telkom" class="preview-img" onclick="toggleZoom(this)">
+      </div>
+      <div class="card-footer">
+        <h3>Ringkasan Alur:</h3>
+        <ul>
+          <li><strong>Autentikasi:</strong> Login multi-role (Administrator STO vs Teknisi DEFA).</li>
+          <li><strong>Monitoring & Master Data:</strong> Pemantauan status perangkat catu daya (PLN, Genset, Rectifier, Baterai, AC presisi).</li>
+          <li><strong>Siklus Pemeliharaan:</strong> Admin membuat jadwal & penugasan &rarr; Teknisi memeriksa di lapangan, mengisi checklist digital, mengunggah foto eviden &rarr; Sistem memperbarui kondisi perangkat dan laporan.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Use Case Diagram -->
+    <div class="diagram-card" id="card-1">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>2. Use Case Diagram <span class="badge">Functional Roles</span></h2>
+          <p>Pemetaan peran aktor (Admin Supervisor & Teknisi DEFA) terhadap seluruh fungsionalitas sistem.</p>
+        </div>
+        <div class="action-group">
+          <a href="images/diagrams/use_case_diagram.png" download="use_case_diagram_telkom.png" class="btn btn-primary">
+            Download PNG (240 DPI)
+          </a>
+          <a href="images/diagrams/use_case_diagram.svg" download="use_case_diagram_telkom.svg" class="btn btn-secondary">
+            Download SVG Vektor
+          </a>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img src="images/diagrams/use_case_diagram.png" alt="Use Case Diagram Monitoring Telkom" class="preview-img" onclick="toggleZoom(this)">
+      </div>
+      <div class="card-footer">
+        <h3>Aktor & Hak Akses:</h3>
+        <ul>
+          <li><strong>Administrator:</strong> CRUD Pengguna, CRUD Data Perangkat STO, Penjadwalan Pemeliharaan, Monitoring Dashboard, Verifikasi & Cetak Laporan.</li>
+          <li><strong>Teknisi:</strong> Lihat Tugas Maintenance, Update Status Pengerjaan, Input Checklist Pengukuran & Upload Eviden Foto, Pembaruan Status Perangkat.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Class Diagram -->
+    <div class="diagram-card" id="card-2">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>3. Class Diagram <span class="badge">Architecture & MVC</span></h2>
+          <p>Struktur arsitektur model Eloquent Laravel, atribut, method relasi database, dan interaksi controller.</p>
+        </div>
+        <div class="action-group">
+          <a href="images/diagrams/class_diagram.png" download="class_diagram_telkom.png" class="btn btn-primary">
+            Download PNG (240 DPI)
+          </a>
+          <a href="images/diagrams/class_diagram.svg" download="class_diagram_telkom.svg" class="btn btn-secondary">
+            Download SVG Vektor
+          </a>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img src="images/diagrams/class_diagram.png" alt="Class Diagram Monitoring Telkom" class="preview-img" onclick="toggleZoom(this)">
+      </div>
+      <div class="card-footer">
+        <h3>Entitas & Model Relasional:</h3>
+        <ul>
+          <li><strong>User:</strong> Model akun dengan relasi <code>hasMany(Maintenance::class, 'teknisi_id')</code>.</li>
+          <li><strong>Perangkat:</strong> Model perangkat infrastruktur dengan relasi <code>hasMany(Maintenance::class, 'perangkat_id')</code>.</li>
+          <li><strong>Maintenance:</strong> Model tiket pemeliharaan dengan foreign keys ke User dan Perangkat, dilengkapi atribut JSON <code>checklist</code> dan path <code>eviden</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. Activity Diagram -->
+    <div class="diagram-card" id="card-3">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>4. Activity Diagram <span class="badge">Workflow Swimlane</span></h2>
+          <p>Diagram aktivitas alur kerja pemeliharaan antara Admin, Sistem, dan Teknisi.</p>
+        </div>
+        <div class="action-group">
+          <a href="images/diagrams/activity_diagram.png" download="activity_diagram_telkom.png" class="btn btn-primary">
+            Download PNG (240 DPI)
+          </a>
+          <a href="images/diagrams/activity_diagram.svg" download="activity_diagram_telkom.svg" class="btn btn-secondary">
+            Download SVG Vektor
+          </a>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img src="images/diagrams/activity_diagram.png" alt="Activity Diagram Monitoring Telkom" class="preview-img" onclick="toggleZoom(this)">
+      </div>
+      <div class="card-footer">
+        <h3>Fase Alur Aktivitas:</h3>
+        <ul>
+          <li><strong>Inisiasi & Disposisi:</strong> Admin input jadwal baru &rarr; Sistem menyimpan jadwal dan mengirim penugasan ke teknisi.</li>
+          <li><strong>Inspeksi Fisik:</strong> Teknisi menuju lokasi STO Base-G, melakukan cek parameter & tegangan, mengisi form checklist dan unggah eviden.</li>
+          <li><strong>Penyelesaian:</strong> Teknisi menyelesaikan tiket & status perangkat otomatis tersinkronisasi di dashboard.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. ERD Diagram -->
+    <div class="diagram-card" id="card-4">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>5. Entity Relationship Diagram (ERD) <span class="badge">Database Schema</span></h2>
+          <p>Skema basis data fisik MySQL dengan tipe data, primary key, foreign key, dan integritas relasional.</p>
+        </div>
+        <div class="action-group">
+          <a href="images/diagrams/erd_diagram.png" download="erd_diagram_telkom.png" class="btn btn-primary">
+            Download PNG (240 DPI)
+          </a>
+          <a href="images/diagrams/erd_diagram.svg" download="erd_diagram_telkom.svg" class="btn btn-secondary">
+            Download SVG Vektor
+          </a>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img src="images/diagrams/erd_diagram.png" alt="ERD Diagram Monitoring Telkom" class="preview-img" onclick="toggleZoom(this)">
+      </div>
+      <div class="card-footer">
+        <h3>Struktur Relasi Basis Data (ERD Bersih):</h3>
+        <ul>
+          <li><strong><code>users</code> (1) &rarr; <code>maintenance</code> (N):</strong> Relasi penugasan teknisi/admin pada kegiatan pemeliharaan (FK: <code>user_id</code> &rarr; <code>users.id</code>, <em>ON DELETE CASCADE</em>).</li>
+          <li><strong><code>perangkat</code> (1) &rarr; <code>maintenance</code> (N):</strong> Relasi riwayat pemeliharaan pada masing-masing unit perangkat STO (FK: <code>perangkat_id</code> &rarr; <code>perangkat.id</code>, <em>ON DELETE CASCADE</em>).</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 PT Telkom Indonesia (Persero) Tbk - STO Base-G Witel Papua. Sistem Monitoring & Pemeliharaan Catu Daya DEFA.
+  </footer>
+
+  <script>
+    function switchTab(index) {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const cards = document.querySelectorAll('.diagram-card');
+
+      tabs.forEach((tab, i) => {
+        if (i === index) {
+          tab.classList.add('active');
+          cards[i].classList.add('active');
+        } else {
+          tab.classList.remove('active');
+          cards[i].classList.remove('active');
+        }
+      });
+    }
+
+    function toggleZoom(img) {
+      img.classList.toggle('zoomed');
+    }
+  </script>
+</body>
+</html>
